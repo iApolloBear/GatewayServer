@@ -9,7 +9,7 @@ import java.util.List;
 @Component
 public class FilterUtils {
   public static final String CORRELATION_ID = "tmx-correlation-id";
-  public static final String AUTH_TOKEN = "tmx-auth-token";
+  public static final String AUTH_TOKEN = "Authorization";
   public static final String USER_ID = "tmx-user-id";
   public static final String ORG_ID = "tmx-org-id";
   public static final String PRE_FILTER_TYPE = "pre";
@@ -19,6 +19,14 @@ public class FilterUtils {
   public String getCorrelationId(HttpHeaders requestHeaders) {
     if (requestHeaders.get(CORRELATION_ID) != null) {
       List<String> header = requestHeaders.get(CORRELATION_ID);
+      return header.stream().findFirst().get();
+    }
+    return null;
+  }
+
+  public String getAuthToken(HttpHeaders requestHeaders) {
+    if (requestHeaders.get(AUTH_TOKEN) != null) {
+      List<String> header = requestHeaders.get(AUTH_TOKEN);
       return header.stream().findFirst().get();
     }
     return null;
